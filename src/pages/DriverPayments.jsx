@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api, { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
+import api from '../utils/api';
 
 const DriverPayments = () => {
   const { user } = useAuth(); // logged-in admin

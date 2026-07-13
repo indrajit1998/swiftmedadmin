@@ -1,4 +1,4 @@
-import api from "../context/AuthContext";
+import api from "../utils/api";
 import { useEffect, useState } from "react";
 import {
   ArrowDownTrayIcon,

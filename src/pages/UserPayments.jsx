@@ -1,7 +1,8 @@
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { useEffect, useMemo, useState } from 'react';
-import api, { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
+import api from '../utils/api';
 
 const UserPayments = () => {
   const { user } = useAuth(); // logged-in admin
