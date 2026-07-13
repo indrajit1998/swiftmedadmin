@@ -11,5 +11,19 @@ api.interceptors.request.use((config) => {
   }
   return config;
 });
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+      // Clear token and user info if token expired or unauthorized
+      localStorage.removeItem("adminToken");
+      localStorage.removeItem("adminUser");
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default api;
