@@ -198,7 +198,7 @@ import api from '../utils/api';
 import io from 'socket.io-client';
 import { useAuth } from '../context/AuthContext';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:9004';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://api.swiftmed.co.in';
 
 // Loader Spinner
 const Loader = () => (
@@ -283,7 +283,7 @@ const Support = () => {
   // }, [user, activeMainTab, selectedTicket]);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('adminToken');
     if (!token) return;
 
     socketRef.current = io(API_BASE_URL, {
