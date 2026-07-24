@@ -225,6 +225,11 @@ const Support = () => {
   const chatEndRef = useRef(null);
   const menuRef = useRef(null);
 
+  const selectedTicketRef = useRef(null);
+  useEffect(() => {
+    selectedTicketRef.current = selectedTicket;
+  }, [selectedTicket]);
+
   // 🔹 SOCKET.IO SETUP
   // useEffect(() => {
   //   const token = localStorage.getItem('token');
@@ -294,16 +299,19 @@ const Support = () => {
 
     socketRef.current.on('support:new_message', newMessage => {
       console.log('📩 Admin received new message:', newMessage);
+      const currentSelected = selectedTicketRef.current;
 
       // ✅ Update conversation if viewing this ticket
-      if (selectedTicket && newMessage.ticketId === selectedTicket._id) {
+      if (currentSelected && newMessage.ticketId === currentSelected._id) {
         setConversation(prev => [...prev, newMessage.message]);
 
         // Mark as read
-        setSelectedTicket(prev => ({
-          ...prev,
-          unreadForAdmin: 0,
-        }));
+        setSelectedTicket(prev => {
+          if (prev && prev._id === newMessage.ticketId) {
+            return { ...prev, unreadForAdmin: 0 };
+          }
+          return prev;
+        });
       }
 
       // ✅ Update ticket list unread count
