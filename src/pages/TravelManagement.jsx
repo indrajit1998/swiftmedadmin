@@ -46,7 +46,7 @@ const mapStatus = (status, searchStatus) => {
 const mapBackendTravels = travels =>
   travels.map(t => ({
     id: t._id,
-    bookingId: t._id.toUpperCase(),
+    bookingId: t.rideId || t.bookingId || t._id.toUpperCase(),
     status: mapStatus(t.status, t.searchStatus),
     pickupLocation: t.pickup,
     dropoffLocation: t.destination,
